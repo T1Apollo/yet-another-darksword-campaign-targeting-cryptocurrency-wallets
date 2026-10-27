@@ -1,114 +1,53 @@
-\# Loader families explained
+# Loader families explained
 
+## 1. `dwrite-loader`
 
+The malicious payload is injected **before** the main SDK code, and the second stage lives on the compromised host.
 
-\## 1. `dwrite-loader`
+![dwrite-loader](dwrite-loader.png)
 
+## 2. `jsjiami-overlay`
 
-
-The malicious payload is injected \*\*before\*\* the main SDK code, and the second stage lives on the compromised host.
-
-
-
-!\[dwrite-loader](dwrite-loader.png)
-
-
-
-\## 2. `jsjiami-overlay`
-
-
-
-Packed with the commercial \*\*jsjiami.com.v7\*\* obfuscator.
-
-
-
-Marker:
-
-
-
+Packed with the commercial **jsjiami.com.v7** obfuscator. Marker:
 ```js
-
-var \_0xodz='jsjiami.com.v7'
-
+var _0xodz='jsjiami.com.v7'
 ```
+![jsjiami-overlay](jsjiami-overlay.png)
 
+## 3. `obf-referrer-redirect`
 
+Obfuscated with **obfuscator.io**, using an `allowedDomains` referrer check (`g-yiwaiwai.com.cn`).
 
-!\[jsjiami-overlay](jsjiami-overlay.png)
-
-
-
-\## 3. `obf-referrer-redirect`
-
-
-
-Obfuscated with \*\*obfuscator.io\*\*, using an `allowedDomains` referrer check (`g-yiwaiwai.com.cn`).
-
-
-
-\- \*\*Off-list visitors\*\* are redirected:
-
-&#x20; ```js
-
-&#x20; window.location = 'https://www.eyy250.com/'
-
-&#x20; ```
-
-\- \*\*On-list visitors\*\* get download links, including an Aliyun OSS zip (`yiwaiwai.zip`).
-
-
+- **Off-list visitors** are redirected:
+  ```js
+  window.location = 'https://www.eyy250.com/'
+  ```
+- **On-list visitors** get download links, including an Aliyun OSS zip (`yiwaiwai.zip`).
 
 For a rather obscure reason, two different versions of the 51LA SDK are deployed in the same script.
 
+![obf-referrer-redirect](obf-referrer-redirect.png)
 
+## 4. `obf-script-loader`
 
-!\[obf-referrer-redirect](obf-referrer-redirect.png)
+Obfuscated with **obfuscator.io**. The URL is split across string-array fragments and reassembled at runtime.
 
+![obf-script-loader](obf-script-loader.png)
 
-
-\## 4. `obf-script-loader`
-
-
-
-Obfuscated with \*\*obfuscator.io\*\*. The URL is split across string-array fragments and reassembled at runtime.
-
-
-
-!\[obf-script-loader](obf-script-loader.png)
-
-
-
-\## 5. `yabo-overlay`
-
-
+## 5. `yabo-overlay`
 
 Plain, unobfuscated JS prepended before the SDK. It bails out when the User-Agent matches:
 
-
-
 ```
-
 Baiduspider|360Spider|YisouSpider|YandexBot|Sogou inst spider|Sogou web spider|spider
-
 ```
-
-
 
 Named after the `yabo` overlay class name.
 
+![yabo-overlay](yabo-overlay.png)
 
+## 6. `spiderUA-overlay`
 
-!\[yabo-overlay](yabo-overlay.png)
+Same concept as the previous family, with the functions `isSpiderUA()`, `createIframe()` and `disableScroll()`. It contains another list of common Chinese-oriented crawlers, with leftover comments translating to *"If it is a spider, exit immediately"*.
 
-
-
-\## 6. `spiderUA-overlay`
-
-
-
-Same concept as the previous family, with the functions `isSpiderUA()`, `createIframe()` and `disableScroll()`. It contains another list of common Chinese-oriented crawlers, with leftover comments translating to \*"If it is a spider, exit immediately"\*.
-
-
-
-!\[spiderUA-overlay](spiderUA-overlay.png)
-
+![spiderUA-overlay](spiderUA-overlay.png)
