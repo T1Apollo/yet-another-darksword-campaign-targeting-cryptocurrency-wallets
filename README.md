@@ -25,3 +25,6 @@ IOCs are grouped by infrastructure cluster, one CSV file per cluster, in the `cl
 - Indicators are **not defanged**. Handle with care.
 
 See the blog post for context, pivots and analysis behind each cluster.
+
+## Author
+[@fkn_apollo](https://x.com/fkn_apollo)
