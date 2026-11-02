@@ -3,7 +3,7 @@
 # IOCs
 
 Indicators of compromise accompanying the blog post:
-**[BLOG POST TITLE](BLOG_POST_URL)**
+**[Yet another darksword campaign targeting cryptocurrency wallets](https://www.own.security/en/ressources/blog/yet-another-darksword-campaign-targeting-cryptocurrency-wallets)**
 
 ## Organization
 
